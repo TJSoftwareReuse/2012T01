@@ -1,13 +1,17 @@
 package com.eva.me.cm;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigUtil{
-	private ConfigUtil instance = null;
+	private static ConfigUtil instance = null;
 	private String configFilePath ="config.properties";
 	private Properties configProperties = null;
 	
-	public ConfigUtil getInstance() {
+	public static ConfigUtil getInstance() {
 		if (instance == null) {
 			instance = new ConfigUtil();
 		}
@@ -19,10 +23,25 @@ public class ConfigUtil{
 	 * 
 	 * @param filePath  Another Configure File's Directory
 	 */
-	public void changeConfigFilePath(String filePath) {
+	private void changeConfigFilePath(String filePath) {
 		this.configFilePath = filePath;
 	}
 	
-	
+	/**
+	 * Load Configure Files with exception catch
+	 */
+	public void loadConfigFile() {
+		configProperties = new Properties();
+		try {
+			InputStream inputStream = new FileInputStream(configFilePath);
+			configProperties.load(inputStream);
+		} catch (FileNotFoundException e) {
+			System.out.println("Config File: "+configFilePath+" Not Found");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Load Failure..");
+			e.printStackTrace();
+		}
+	}
 	
 }
