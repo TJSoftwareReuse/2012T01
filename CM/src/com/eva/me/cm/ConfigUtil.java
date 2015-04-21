@@ -4,6 +4,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class ConfigUtil{
@@ -42,6 +45,24 @@ public class ConfigUtil{
 			System.out.println("Load Failure..");
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Reveal All Properties In Configure Files
+	 * @return Map<String, String> results
+	 */
+	public Map<String, String> showConfigFileContent() {
+		if (configProperties == null) {
+			loadConfigFile();//initialize... if is null, then load....
+		}
+		Map<String,String> results = new HashMap<String,String>();
+		Enumeration<?> enumeration = configProperties.propertyNames();
+		while (enumeration.hasMoreElements()) {
+			String key = (String) enumeration.nextElement();
+			String value = configProperties.getProperty(key);
+			results.put(key, value);
+		}
+		return results;
 	}
 	
 }
