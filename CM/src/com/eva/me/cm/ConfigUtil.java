@@ -65,4 +65,17 @@ public class ConfigUtil{
 		return results;
 	}
 	
+	/**
+	 * get properties
+	 * @param key
+	 * @return return null if can not find param 'key'
+	 */
+	public String getProperty(String key) {
+		String value = null;
+		if (configProperties == null) {
+			loadConfigFile();//initialize... if is null, then load....
+		}
+		value = configProperties.getProperty(key);
+		return value;
+	}
 }
