@@ -28,7 +28,7 @@ public class ConfigUtil{
 	 * 
 	 * @param filePath  Another Configure File's Directory
 	 */
-	private void changeConfigFilePath(String filePath) {
+	public void changeConfigFilePath(String filePath) {
 		this.configFilePath = filePath;
 	}
 	
