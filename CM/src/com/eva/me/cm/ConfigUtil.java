@@ -1,20 +1,26 @@
 package com.eva.me.cm;
 
-public class ConfigUtil implements Inquiry{
-	private String configFilePath ="config.properties";
-	
-	public boolean readConfigFile() {
-		return true;
-	}
-	
-	public void setConfigFilePath(String filePath) {
-		this.configFilePath = filePath;
-	}
+import java.util.Properties;
 
-	@Override
-	public String getInfo(String keyword) {
-		
-		return null;
+public class ConfigUtil{
+	private ConfigUtil instance = null;
+	private String configFilePath ="config.properties";
+	private Properties configProperties = null;
+	
+	public ConfigUtil getInstance() {
+		if (instance == null) {
+			instance = new ConfigUtil();
+		}
+		return instance;
+	}
+	
+	/**
+	 * default configure file name: 'config.properties'
+	 * 
+	 * @param filePath  Another Configure File's Directory
+	 */
+	public void changeConfigFilePath(String filePath) {
+		this.configFilePath = filePath;
 	}
 	
 	
