@@ -37,9 +37,8 @@ public class ConfigUtil{
 	 * Load Configure Files with exception catch <br>
 	 * Note: <br>
 	 * We really recommend you to call this method before you reading or changing
-	 * every config file, but if you don't do like this, it doesn't matter, <strong>BUT</strong>
-	 * you must call this method
-	 *  it will ensure the config file is correct.	
+	 * every config file, but if you don't do like this, it doesn't matter, 
+	 *  it just will ensure the config file is correct.	
 	 */
 	public void loadConfigFile() {
 		configProperties = new Properties();
