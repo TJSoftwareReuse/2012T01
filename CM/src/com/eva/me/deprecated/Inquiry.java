@@ -1,4 +1,4 @@
-package com.eva.me.cm;
+package com.eva.me.deprecated;
 
 @Deprecated
 public interface Inquiry {
