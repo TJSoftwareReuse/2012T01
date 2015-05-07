@@ -19,12 +19,13 @@ public class ConfigUtil{
 	public static ConfigUtil getInstance() {
 		if (instance == null) {
 			instance = new ConfigUtil();
+			instance.loadConfigFile();
 		}
 		return instance;
 	}
 	
 	/**
-	 * default configure file name: 'config.properties'
+	 * default configure file name: 'config.properties', if not specified using this method. 
 	 * 
 	 * @param filePath  Another Configure File's Directory
 	 */
@@ -33,7 +34,12 @@ public class ConfigUtil{
 	}
 	
 	/**
-	 * Load Configure Files with exception catch
+	 * Load Configure Files with exception catch <br>
+	 * Note: <br>
+	 * We really recommend you to call this method before you reading or changing
+	 * every config file, but if you don't do like this, it doesn't matter, <strong>BUT</strong>
+	 * you must call this method
+	 *  it will ensure the config file is correct.	
 	 */
 	public void loadConfigFile() {
 		configProperties = new Properties();
@@ -41,7 +47,7 @@ public class ConfigUtil{
 			InputStream inputStream = new FileInputStream(configFilePath);
 			configProperties.load(inputStream);
 		} catch (FileNotFoundException e) {
-			System.out.println("Config File: "+configFilePath+" Not Found");
+			System.out.println("Config File: "+configFilePath+" Not Found,\n Generating new config file...");
 			e.printStackTrace();
 		} catch (IOException e) {
 			System.out.println("Load Failure..");
@@ -82,7 +88,9 @@ public class ConfigUtil{
 	}
 	
 	/**
-	 * Set Properties with key value
+	 * Set Properties with key value;<br>
+	 * 		&nbsp if 'key' not exists, will create a 'key, value' pair in the configure file; <br>
+	 * 		&nbsp if 'key' exists, will use the new 'value' to override the origin value of 'key'<br>
 	 * @param key
 	 * @param value
 	 */
