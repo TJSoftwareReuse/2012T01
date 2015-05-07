@@ -32,7 +32,7 @@ public class Test {
 		}
 		
 		ConfigUtil.getInstance().changeConfigFilePath("config2.properties");//have another file but will not be able to open by the editor// can be open
-		ConfigUtil.getInstance().loadConfigFile();
+//		ConfigUtil.getInstance().loadConfigFile();
 		ConfigUtil.getInstance().setProperty("key0", "value00");
 		ConfigUtil.getInstance().setProperty("key1", "value11");
 		ConfigUtil.getInstance().setProperty("key2", "value22");
