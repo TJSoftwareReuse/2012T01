@@ -31,6 +31,7 @@ public class ConfigUtil{
 	 */
 	public void changeConfigFilePath(String filePath) {
 		this.configFilePath = filePath;
+		getInstance().loadConfigFile();
 	}
 	
 	/**
@@ -40,7 +41,7 @@ public class ConfigUtil{
 	 * every config file, but if you don't do like this, it doesn't matter, 
 	 *  it just will ensure the config file is correct.	
 	 */
-	public void loadConfigFile() {
+	private void loadConfigFile() {
 		configProperties = new Properties();
 		try {
 			InputStream inputStream = new FileInputStream(configFilePath);
