@@ -10,6 +10,10 @@ public class Server extends ServerSocket{
 	public Server() throws IOException {
 		super(SERVER_PORT);
 		
+		while (true) {
+			
+		}
+		
 	}
 	
 	
