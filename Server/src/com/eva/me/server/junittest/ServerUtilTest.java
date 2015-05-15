@@ -8,6 +8,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.eva.me.cm.ConfigUtil;
+
 /**
  * @author Zing
  *
@@ -22,8 +24,8 @@ public class ServerUtilTest {
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testCMModule() {
+		ConfigUtil.getInstance().setProperty("", );
 	}
 
 }
