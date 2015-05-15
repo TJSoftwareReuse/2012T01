@@ -14,8 +14,10 @@ public class ServerUtil {
 	private static final int LICENSE_MAX_SIZE = 10;
 	private static final License license = new License(LICENSE_MAX_SIZE);
 	private static final PM pm = new PM();
+	private static final String pmPath = "./PMLog/";
 	private static final ErrorUtil eu = new ErrorUtil();
 	
+	// SERVER STATUS
 	private static int receivedNum = 0;
 	private static int sendBackNum = 0;
 	private static int rejectNum = 0;
@@ -47,25 +49,34 @@ public class ServerUtil {
 		log("FM module finished!");
 	}
 	
-	public static void doPMPart(String key, int value) {
-//		pm.addItem("", 1);
-		//不知道怎么用
-		
-		
+	public static void startPM() {
+		PM.setPath(pmPath);
+		PM.start();
 	}
 	
-	public static void processAll(String request) {
+	public static void doPMPart(String key, int value) {
+		PM.addItem(key, value);
+	}
+	
+	public static void stopPM() {
+		PM.stop();
+	}
+	
+	@Deprecated
+	public static String processAll(String request) {
+		String groupName = null;
 		doPMPart("Received", ++receivedNum);//received msg
 		
 		//license valid?
 		boolean canGiveService  = doLiensePart();
 		if (canGiveService) {
 			doPMPart("Support", ++supportNum);
+			groupName = doCMPart(request);
 		}else {
 			doPMPart("Reject", ++rejectNum);
 			
 		}
 		
-		
+		return groupName;
 	}
 }
