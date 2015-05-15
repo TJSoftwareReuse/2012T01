@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.eva.me.cm.ConfigUtil;
@@ -37,10 +38,16 @@ public class JUnitTestCase {
 	@Test
 	public void testSetProperty2() {
 		System.out.println("");
-		
+
 		ConfigUtil.getInstance().setProperty("key0", "value3");//will overwrite value of key 'key0'
+		ConfigUtil.getInstance().setProperty("key3", "哈哈哈");
+		ConfigUtil.getInstance().setProperty("你好", "value3");
 		
 		showAllItems();
+		
+		System.out.println("\n\n"+ConfigUtil.getInstance().getProperty("你好"));
+		System.out.println("\n\n"+ConfigUtil.getInstance().getProperty("key3"));
+		
 	}
 	
 	@Test

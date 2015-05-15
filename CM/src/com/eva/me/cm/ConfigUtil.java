@@ -15,6 +15,7 @@ public class ConfigUtil{
 	private static ConfigUtil instance = null;
 	private String configFilePath ="config.properties";
 	private Properties configProperties = null;
+	private String  charSet = "utf-8"; 
 	
 	public static ConfigUtil getInstance() {
 		if (instance == null) {
