@@ -42,6 +42,8 @@ public class ClientProcessThread extends Thread{
 				"\tIP:PORT = "+inetAddress+" : "+port);
 		
 		request = transInputStreamToStr(inputStream);
+		log("Client request: "+request);
+		
 		
 	}
 	
@@ -63,7 +65,7 @@ public class ClientProcessThread extends Thread{
 		try {
 			result = new String(dataAll,0,dataAll.length,encoding);
 		} catch (UnsupportedEncodingException e) {
-			System.out.println("UnsupportedEncodingException.....");
+			log("UnsupportedEncodingException.....");
 			e.printStackTrace();
 		}
 		
