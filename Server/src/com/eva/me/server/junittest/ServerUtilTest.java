@@ -6,6 +6,7 @@ package com.eva.me.server.junittest;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.eva.me.cm.ConfigUtil;
@@ -24,6 +25,7 @@ public class ServerUtilTest {
 	public void setUp() throws Exception {
 	}
 
+	@Ignore
 	@Test
 	public void testCMModuleInit() {
 		ConfigUtil.getInstance().setProperty("吴逸菲", "第一组");
@@ -84,6 +86,7 @@ public class ServerUtilTest {
 		
 	}
 
+	@Ignore
 	@Test
 	public void testCMModule() {
 		assertEquals("Be Same", "第一组", ServerUtil.doCMPart("许铭淏"));
@@ -94,5 +97,17 @@ public class ServerUtilTest {
 		assertEquals("Be Same", null, ServerUtil.doCMPart("Anonymous"));
 		
 	}
+
+	@Test
+	public void testLicenseModule() {
+		for (int i = 0; i < 10; i++) {
+			assertEquals("In license", true,ServerUtil.doLiensePart());
+		}
+		assertEquals("No in license", false, ServerUtil.doLiensePart());
+	}
 	
+	@Test
+	public void testPMModule() {
+		
+	}
 }
