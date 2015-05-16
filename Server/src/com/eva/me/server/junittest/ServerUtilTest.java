@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.eva.me.cm.ConfigUtil;
+import com.eva.me.server.ServerUtil;
 
 /**
  * @author Zing
@@ -24,8 +25,74 @@ public class ServerUtilTest {
 	}
 
 	@Test
-	public void testCMModule() {
-		ConfigUtil.getInstance().setProperty("", );
+	public void testCMModuleInit() {
+		ConfigUtil.getInstance().setProperty("吴逸菲", "第一组");
+		ConfigUtil.getInstance().setProperty("黄徐欢", "第一组");
+		ConfigUtil.getInstance().setProperty("李亚斯", "第一组");
+		ConfigUtil.getInstance().setProperty("许铭淏", "第一组");
+		
+		ConfigUtil.getInstance().setProperty("王笑盈", "第二组");
+		ConfigUtil.getInstance().setProperty("孙琳", "第二组");
+		ConfigUtil.getInstance().setProperty("许舰", "第二组");
+		ConfigUtil.getInstance().setProperty("李伟", "第二组");
+		ConfigUtil.getInstance().setProperty("关晨", "第二组");
+		
+		ConfigUtil.getInstance().setProperty("胡圣托", "第三组");
+		ConfigUtil.getInstance().setProperty("邓冰茜", "第三组");
+		ConfigUtil.getInstance().setProperty("张奕格", "第三组");
+		ConfigUtil.getInstance().setProperty("郑勇俊", "第三组");
+		ConfigUtil.getInstance().setProperty("代蒙", "第三组");
+
+		ConfigUtil.getInstance().setProperty("梁竞文", "第四组");
+		ConfigUtil.getInstance().setProperty("彭秋辰", "第四组");
+		ConfigUtil.getInstance().setProperty("胡文超", "第四组");
+		ConfigUtil.getInstance().setProperty("杨爽", "第四组");
+
+		ConfigUtil.getInstance().setProperty("关清晨", "第五组");
+		ConfigUtil.getInstance().setProperty("杨春雨", "第五组");
+		ConfigUtil.getInstance().setProperty("周泽宏", "第五组");
+		ConfigUtil.getInstance().setProperty("杨宇歆", "第五组");
+		ConfigUtil.getInstance().setProperty("张良", "第五组");
+
+		ConfigUtil.getInstance().setProperty("喻帅", "第六组");
+		ConfigUtil.getInstance().setProperty("刘蕊", "第六组");
+		ConfigUtil.getInstance().setProperty("张旭晨", "第六组");
+		ConfigUtil.getInstance().setProperty("韦吾境", "第六组");
+		ConfigUtil.getInstance().setProperty("时雨", "第六组");
+
+		ConfigUtil.getInstance().setProperty("尹巧", "第七组");
+		ConfigUtil.getInstance().setProperty("方程", "第七组");
+		ConfigUtil.getInstance().setProperty("赵鹏", "第七组");
+		ConfigUtil.getInstance().setProperty("黄昕", "第七组");
+		ConfigUtil.getInstance().setProperty("于航", "第七组");
+
+		ConfigUtil.getInstance().setProperty("丁宇笙", "第八组");
+		ConfigUtil.getInstance().setProperty("邱尚昭", "第八组");
+		ConfigUtil.getInstance().setProperty("高屹", "第八组");
+		ConfigUtil.getInstance().setProperty("杨丰", "第八组");
+		ConfigUtil.getInstance().setProperty("贺志鹏", "第八组");
+		
+		ConfigUtil.getInstance().setProperty("陈璐", "第九组");
+		ConfigUtil.getInstance().setProperty("褚振方", "第九组");
+		ConfigUtil.getInstance().setProperty("陈启源", "第九组");
+		ConfigUtil.getInstance().setProperty("于自跃", "第九组");
+
+		ConfigUtil.getInstance().setProperty("姜木慧", "第十组");
+		ConfigUtil.getInstance().setProperty("王远", "第十组");
+		ConfigUtil.getInstance().setProperty("刘禹嘉", "第十组");
+		ConfigUtil.getInstance().setProperty("叶剑权", "第十组");
+		
 	}
 
+	@Test
+	public void testCMModule() {
+		assertEquals("Be Same", "第一组", ServerUtil.doCMPart("许铭淏"));
+		assertEquals("Be Same", "第七组", ServerUtil.doCMPart("尹巧"));
+		assertEquals("Be Same", "第八组", ServerUtil.doCMPart("邱尚昭"));
+		assertEquals("Be Same", "第九组", ServerUtil.doCMPart("陈璐"));
+		assertEquals("Be Same", "第十组", ServerUtil.doCMPart("刘禹嘉"));
+		assertEquals("Be Same", null, ServerUtil.doCMPart("Anonymous"));
+		
+	}
+	
 }
