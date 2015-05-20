@@ -50,8 +50,8 @@ public class ServerUtil {
 	}
 	
 	public static void startPM() {
-		PM.setPath(pmPath);
 		PM.start();
+		PM.setPath(pmPath);
 	}
 	
 	public static void doPMPart(String key, int value) {

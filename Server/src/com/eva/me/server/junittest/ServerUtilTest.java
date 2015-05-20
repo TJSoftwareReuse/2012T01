@@ -5,6 +5,8 @@ package com.eva.me.server.junittest;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -98,6 +100,7 @@ public class ServerUtilTest {
 		
 	}
 
+	@Ignore
 	@Test
 	public void testLicenseModule() {
 		for (int i = 0; i < 10; i++) {
@@ -107,7 +110,33 @@ public class ServerUtilTest {
 	}
 	
 	@Test
+	public void testFMModule() {
+		ServerUtil.doFMPart(1);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		ServerUtil.doFMPart(2);
+	}
+	
+	@Ignore
+	@Test
 	public void testPMModule() {
+		ServerUtil.startPM();
+		log("PM Start.... at time: "+new Date());
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		ServerUtil.doPMPart("hahahahah", 13);
 		
+		ServerUtil.stopPM();
+		log("PM Stop.... at time: "+new Date());
+	}
+	
+	private void log(String str) {
+		System.out.println(str);
 	}
 }
