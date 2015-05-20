@@ -1,6 +1,7 @@
 package com.eva.me.server;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -15,9 +16,11 @@ public class Server extends ServerSocket{
 	
 	public Server() throws IOException {
 		super(SERVER_PORT);
-		
+		log("Server start at InetAddress "+InetAddress.getLocalHost() + " : "+SERVER_PORT);
 		while (true) {
+			log("Ready for receive socket...");
 			Socket clientSocket = accept();
+			log("Socket received....");
 			ClientProcessThread clientThread = new ClientProcessThread(clientSocket);
 		}
 		
@@ -26,8 +29,8 @@ public class Server extends ServerSocket{
 	
 	public static void startServer() {
 		try {
-			mServer = new Server();
 			log("Start Server....");
+			mServer = new Server();
 		} catch (IOException e) {
 			log("Server Start Exception...");
 			e.printStackTrace();

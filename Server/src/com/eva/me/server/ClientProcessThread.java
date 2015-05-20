@@ -17,7 +17,7 @@ public class ClientProcessThread extends Thread{
 	private InputStream inputStream = null;
 	private OutputStream outputStream = null;
 	
-	private final String response = null;
+	private String response = null;
 	private final String request; 
 	
 	
@@ -72,6 +72,17 @@ public class ClientProcessThread extends Thread{
 		return result;
 	}
 
+	private void transStringToOutputStream(final String strContent, OutputStream oStream) {
+		byte[] data = strContent.getBytes();
+		try {
+			oStream.write(data);
+			oStream.flush();
+		} catch (IOException e) {
+			System.out.println("Write strContent: "+strContent+" to output stream error...");			
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void run() {
 		super.run();
@@ -80,12 +91,73 @@ public class ClientProcessThread extends Thread{
 			log("\nNew Client Request Process Thread create.....\n\n");
 			processClientInfo();
 			log("\nNew Client Request Process Complete.....\n\n");
+			
+			try {
+				inputStream.close();
+				outputStream.close();
+				clientSocket.close();
+			} catch (IOException e) {
+				System.out.println("Stream.. close .. error...");
+				e.printStackTrace();
+			}
 		}
 		
 	}
 
 	private void processClientInfo() {
 		
+		//receive message
+		//PM rec+1
+		//License can provide service: true or fasle
+		ServerUtil.receivedNum ++ ;
+		log("processClientInfo : "+"receive num ++");
+		boolean canProvideService = ServerUtil.doLiensePart();
+		log("processClientInfo : "+" can provide service: "+canProvideService);
+		
+		if (canProvideService) {
+			//if true
+			//FM provide service
+			//PM proSer + 1
+			//CM return group name
+			//PM retMsg + 1
+			ServerUtil.doFMPart(1);
+			log("processClientInfo : "+"do FM part...");
+			ServerUtil.supportNum ++ ;
+			log("processClientInfo : "+"support num ++");
+			ServerUtil.doPMPart("provide_service", ServerUtil.supportNum);
+			log("processClientInfo : "+"do PM part, provide_service update");
+			String groupName = ServerUtil.doCMPart(request);
+			log("processClientInfo : "+"do CM part, find group name... through ID: "+request);
+			if (groupName == null) {
+				log("processClientInfo : "+"do CM part, group name is null ... ID: "+request+" do not in any group");
+				response = "Group Name Do Not Exist!";
+			}else {
+				log("processClientInfo : "+"do CM part, group name is "+groupName+" ... ID: "+request);
+				response = groupName;
+			}
+		} else {
+			//if false
+			//FM do not provide service
+			//PM rejSer + 1
+			// return refuse service ...
+			//PM retMsg + 1
+			ServerUtil.doFMPart(2);
+			log("processClientInfo : "+"do FM part...");
+			ServerUtil.rejectNum ++ ;
+			log("processClientInfo : "+"reject num ++");
+			ServerUtil.doPMPart("reject_provide_service", ServerUtil.rejectNum);
+			log("processClientInfo : "+"do PM part, reject_provide_service update");
+			response = "Reject Provide Service, Check Your License!";
+		}
+		
+		//return reponse
+		transStringToOutputStream(response, outputStream);
+		log("Response Success: "+response);
+		
+		ServerUtil.sendBackNum ++ ;
+		log("processClientInfo : "+"sendBack num ++");
+		ServerUtil.doPMPart("send_back", ServerUtil.sendBackNum);
+		log("processClientInfo : "+"do PM part, send_back update");
 	}
 	
 }

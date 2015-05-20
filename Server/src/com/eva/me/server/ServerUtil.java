@@ -18,10 +18,10 @@ public class ServerUtil {
 	private static final ErrorUtil eu = new ErrorUtil();
 	
 	// SERVER STATUS
-	private static int receivedNum = 0;
-	private static int sendBackNum = 0;
-	private static int rejectNum = 0;
-	private static int supportNum = 0;
+	public static int receivedNum = 0;
+	public static int sendBackNum = 0;
+	public static int rejectNum = 0;
+	public static int supportNum = 0;
 	
 	
 	private static void log(String str) {
@@ -50,16 +50,16 @@ public class ServerUtil {
 	}
 	
 	public static void startPM() {
-		PM.start();
-		PM.setPath(pmPath);
+//		PM.start();
+//		PM.setPath(pmPath);
 	}
 	
 	public static void doPMPart(String key, int value) {
-		PM.addItem(key, value);
+//		PM.addItem(key, value);
 	}
 	
 	public static void stopPM() {
-		PM.stop();
+//		PM.stop();
 	}
 	
 	@Deprecated
