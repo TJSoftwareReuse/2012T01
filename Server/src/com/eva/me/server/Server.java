@@ -22,6 +22,8 @@ public class Server extends ServerSocket{
 			Socket clientSocket = accept();
 			log("Socket received....");
 			ClientProcessThread clientThread = new ClientProcessThread(clientSocket);
+			log("Client Thread Init.....ready for start...");
+			clientThread.start();
 		}
 		
 	}

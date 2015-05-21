@@ -11,7 +11,7 @@ import java.net.Socket;
 
 public class ClientProcessThread extends Thread{
 	
-	private final String encoding = "utf-8";
+	private final String encoding = "UTF-8";
 	
 	private Socket clientSocket = null;
 	private InputStream inputStream = null;
@@ -30,6 +30,7 @@ public class ClientProcessThread extends Thread{
 		try {
 			inputStream = clientSocket.getInputStream();
 			outputStream = clientSocket.getOutputStream();
+			log("input stream output stream get....");
 		} catch (IOException e) {
 			log("inputStream | outputStream init error....");
 			e.printStackTrace();
@@ -52,9 +53,12 @@ public class ClientProcessThread extends Thread{
 		try {
 			final int BUFFER_SIZE = 1024;
 			byte[] data = new byte[BUFFER_SIZE];
+			int m =0;
 			int count =-1;
 			while((count = iStream.read(data)) != -1) {
 					byteArrayOutputStream.write(data);
+					log("m ="+m);
+					m++;
 			}
 			byteArrayOutputStream.flush();
 		} catch (IOException e) {
@@ -68,7 +72,7 @@ public class ClientProcessThread extends Thread{
 			log("UnsupportedEncodingException.....");
 			e.printStackTrace();
 		}
-		
+		result.replaceAll("\n|\r", "");
 		return result;
 	}
 
@@ -87,7 +91,7 @@ public class ClientProcessThread extends Thread{
 	public void run() {
 		super.run();
 		
-		synchronized (Server.serverLock) {
+//		synchronized (Server.serverLock) {
 			log("\nNew Client Request Process Thread create.....\n\n");
 			processClientInfo();
 			log("\nNew Client Request Process Complete.....\n\n");
@@ -100,7 +104,7 @@ public class ClientProcessThread extends Thread{
 				System.out.println("Stream.. close .. error...");
 				e.printStackTrace();
 			}
-		}
+//		}
 		
 	}
 
