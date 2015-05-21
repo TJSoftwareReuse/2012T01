@@ -43,7 +43,7 @@ public class ClientProcessThread extends Thread{
 				"\tIP:PORT = "+inetAddress+" : "+port);
 		
 		request = transInputStreamToStr(inputStream);
-		log("Client request: "+request);
+		log("Client request: |"+request+"|");
 		
 		
 	}
@@ -51,7 +51,7 @@ public class ClientProcessThread extends Thread{
 	private String transInputStreamToStr(InputStream iStream) {
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		try {
-			final int BUFFER_SIZE = 1024;
+			final int BUFFER_SIZE = 1;
 			byte[] data = new byte[BUFFER_SIZE];
 			int m =0;
 			int count =-1;
@@ -68,11 +68,16 @@ public class ClientProcessThread extends Thread{
 		String result = "";
 		try {
 			result = new String(dataAll,0,dataAll.length,encoding);
+			result = new String(dataAll,0,dataAll.length);
+//		result = new String(dataAll);
+//		log("length = "+dataAll.length);
+			
 		} catch (UnsupportedEncodingException e) {
 			log("UnsupportedEncodingException.....");
 			e.printStackTrace();
 		}
 		result.replaceAll("\n|\r", "");
+		result.trim();
 		return result;
 	}
 
@@ -91,7 +96,7 @@ public class ClientProcessThread extends Thread{
 	public void run() {
 		super.run();
 		
-//		synchronized (Server.serverLock) {
+		synchronized (Server.serverLock) {
 			log("\nNew Client Request Process Thread create.....\n\n");
 			processClientInfo();
 			log("\nNew Client Request Process Complete.....\n\n");
@@ -104,7 +109,7 @@ public class ClientProcessThread extends Thread{
 				System.out.println("Stream.. close .. error...");
 				e.printStackTrace();
 			}
-//		}
+		}
 		
 	}
 
@@ -155,7 +160,7 @@ public class ClientProcessThread extends Thread{
 		}
 		
 		//return reponse
-		transStringToOutputStream(response, outputStream);
+		transStringToOutputStream(response+"\n", outputStream);
 		log("Response Success: "+response);
 		
 		ServerUtil.sendBackNum ++ ;

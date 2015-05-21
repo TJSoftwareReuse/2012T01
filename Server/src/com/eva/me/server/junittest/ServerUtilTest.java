@@ -27,7 +27,7 @@ public class ServerUtilTest {
 	public void setUp() throws Exception {
 	}
 
-	@Ignore
+//	@Ignore
 	@Test
 	public void testCMModuleInit() {
 		ConfigUtil.getInstance().setProperty("吴逸菲", "第一组");
