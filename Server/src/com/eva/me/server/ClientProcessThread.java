@@ -1,13 +1,14 @@
 package com.eva.me.server;
 
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class ClientProcessThread extends Thread{
 	
@@ -25,8 +26,14 @@ public class ClientProcessThread extends Thread{
 		System.out.println(logContent);
 	}
 	
-	public ClientProcessThread(Socket clientSocket) {
-		this.clientSocket = clientSocket;
+	public ClientProcessThread(Socket cSocket) {
+		this.clientSocket = cSocket;
+		try {
+			clientSocket.setSoTimeout(2000);
+		} catch (SocketException e1) {
+			log("timeout....");
+			e1.printStackTrace();
+		}
 		try {
 			inputStream = clientSocket.getInputStream();
 			outputStream = clientSocket.getOutputStream();
@@ -82,14 +89,19 @@ public class ClientProcessThread extends Thread{
 	}
 
 	private void transStringToOutputStream(final String strContent, OutputStream oStream) {
-		byte[] data = strContent.getBytes();
-		try {
-			oStream.write(data);
-			oStream.flush();
-		} catch (IOException e) {
-			System.out.println("Write strContent: "+strContent+" to output stream error...");			
-			e.printStackTrace();
-		}
+//		byte[] data = strContent.getBytes();
+//		try {
+//			oStream.write(data);
+//			oStream.flush();
+//		} catch (IOException e) {
+//			System.out.println("Write strContent: "+strContent+" to output stream error...");			
+//			e.printStackTrace();
+//		}
+		PrintStream out = new PrintStream(oStream);
+		out.println(strContent);
+		out.flush();
+		out.close();
+		
 	}
 	
 	@Override

@@ -21,7 +21,7 @@ public class Client {
 	public  static void main (String [] args) {
 		InetAddress inetAddress = null;
 		try {
-			inetAddress = InetAddress.getByName("192.168.1.105");
+			inetAddress = InetAddress.getByName("192.168.56.1");
 		} catch (UnknownHostException e) {
 			System.out.println("UnknownHostException");
 			e.printStackTrace();
@@ -29,7 +29,7 @@ public class Client {
 		while (true) {
 			try {
 				Socket clientSocket = new Socket(inetAddress, port);
-				clientSocket.setSoTimeout(4000);
+				clientSocket.setSoTimeout(10000);
 				
 				log("New Client Socket Instance init");
 				
@@ -40,10 +40,10 @@ public class Client {
 					break;
 				}
 				transStringToOutputStream(memName, oStream);
+				oStream.close();
 				String  result = transInputStreamToStr(iStream);
 				log("result: "+result);
 				
-				oStream.close();
 				iStream.close();
 				clientSocket.close();
 			} catch (IOException e) {
