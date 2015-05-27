@@ -1,12 +1,24 @@
 # -*- coding: utf-8 -*-
-import socket
+import socket, sys, chardet
+
+if len(sys.argv) != 4:
+    print 'Parameter not mate, notice must use like this:'
+    print '\rpython client.py [ip] [port] [member_name]'
+    sys.exit(0)
+
+ip = sys.argv[1]
+port = sys.argv[2]
+member = sys.argv[3]
+
+print chardet.detect(member)
 
 s = socket.socket()
-addr = ('192.168.56.1', 12234)
+# addr = ('192.168.56.1', 12234)
+addr = (ip, int(port))
 
 s.connect(addr)
-member ='许铭淏'
-s.send(member)
+# member ='许铭淏'
+s.send(member.encode('IBM855'))
 
 data = s.recv(1024)
 print 'data: ',data.decode('utf-8')
