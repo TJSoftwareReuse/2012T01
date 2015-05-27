@@ -27,7 +27,7 @@ public class ServerUtilTest {
 	public void setUp() throws Exception {
 	}
 
-//	@Ignore
+	@Ignore
 	@Test
 	public void testCMModuleInit() {
 		ConfigUtil.getInstance().setProperty("吴逸菲", "第一组");
@@ -86,6 +86,21 @@ public class ServerUtilTest {
 		ConfigUtil.getInstance().setProperty("刘禹嘉", "第十组");
 		ConfigUtil.getInstance().setProperty("叶剑权", "第十组");
 		
+	}
+	
+	@Test
+	public void testCMModuleForNewGroup() {
+//		ConfigUtil.getInstance().changeConfigFilePath("group_member.properties");
+		ConfigUtil.getInstance().setProperty("第一组","吴逸菲,黄徐欢,李亚斯,许铭淏");
+		ConfigUtil.getInstance().setProperty("第二组","王笑盈,孙琳,许舰,李伟,关晨");
+		ConfigUtil.getInstance().setProperty("第三组","胡圣托,邓冰茜,张奕格,郑勇俊,代蒙");
+		ConfigUtil.getInstance().setProperty("第四组","梁竞文,彭秋辰,胡文超,杨爽");
+		ConfigUtil.getInstance().setProperty("第五组","关清晨,杨春雨,周泽宏,杨宇歆,张良");
+		ConfigUtil.getInstance().setProperty("第六组","喻帅,刘蕊,张旭晨,韦吾境,时雨");
+		ConfigUtil.getInstance().setProperty("第七组","尹巧,方程,赵鹏,黄昕,于航");
+		ConfigUtil.getInstance().setProperty("第八组","丁宇笙,邱尚昭,高屹,杨丰,贺志鹏");
+		ConfigUtil.getInstance().setProperty("第九组","陈璐,褚振方,陈启源,于自跃");
+		ConfigUtil.getInstance().setProperty("第十组","姜木慧,王远,刘禹嘉,叶剑权");
 	}
 
 	@Ignore
