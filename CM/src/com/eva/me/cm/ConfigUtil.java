@@ -13,9 +13,9 @@ import java.util.Properties;
 
 public class ConfigUtil{
 	private static ConfigUtil instance = null;
-	private String configFilePath ="config.properties";
+	private static String  configFilePath = "config.properties";
 	private Properties configProperties = null;
-	private String  charSet = "utf-8"; 
+	private String charSet = "utf-8";
 	
 	public static ConfigUtil getInstance() {
 		if (instance == null) {
@@ -30,8 +30,8 @@ public class ConfigUtil{
 	 * 
 	 * @param filePath  Another Configure File's Directory
 	 */
-	public void changeConfigFilePath(String filePath) {
-		this.configFilePath = filePath;
+	public static void changeConfigFilePath(String filePath) {
+		configFilePath = filePath;
 		getInstance().loadConfigFile();
 	}
 	
