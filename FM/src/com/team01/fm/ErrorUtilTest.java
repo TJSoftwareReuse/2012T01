@@ -1,4 +1,4 @@
-package com.team01.pm;
+package com.team01.fm;
 
 import static org.junit.Assert.*;
 
@@ -22,7 +22,6 @@ public class ErrorUtilTest {
 		assertEquals(true, EU.report_an_error(1));
 		assertEquals(true, EU.report_an_error(2));
 		assertEquals(true, EU.report_an_error(3));
-		assertEquals(true, EU.report_an_error(4));
 	}
 
 }

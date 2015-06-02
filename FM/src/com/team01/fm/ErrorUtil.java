@@ -1,7 +1,8 @@
-package com.team01.pm;
+package com.team01.fm;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -15,7 +16,9 @@ import java.util.Map;
 
 public class ErrorUtil {
 	private String error_list_path = "error_list";
-	private String log_file_path = "error.log";
+	private String log_file_name = "error.log";
+	private String log_file_path = "";
+	private Integer last_error_id = -1;
 	private Map< Integer, String > error_summary = new HashMap< Integer, String >();
 	
 	public ErrorUtil() {
@@ -23,7 +26,6 @@ public class ErrorUtil {
 		try {
 			fis = new FileInputStream(error_list_path);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			System.out.println("error list not exist");
 			e.printStackTrace();
 		}
@@ -34,7 +36,6 @@ public class ErrorUtil {
 			num = bd.read();
 			bd.readLine();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println("can not read the error list");
 			e.printStackTrace();
 		}
@@ -44,7 +45,6 @@ public class ErrorUtil {
 			try {
 				summary = bd.readLine();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				System.out.println("can not read the error list");
 				e.printStackTrace();
 			}
@@ -53,21 +53,44 @@ public class ErrorUtil {
 		try {
 			bd.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println("no file are opened");
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean set_error_path(String error_path) {
+		String str = "";
+		System.out.println(error_path);
+		if(error_path.indexOf(error_path.length()-1)=='\\')
+			str = error_path.substring(error_path.length()-1);
+		else
+			str = error_path;
+		File file = new File(error_path);
+		System.out.println(str);
+		if(!file.exists()) {
+			try {
+				file.mkdirs();
+				log_file_path = str + "\\";
+			} catch (Exception e) {
+				System.out.println("Filed to set the error path");
+			}
+		}
+		else {
+			log_file_path = str + "\\";
+		}
+		return true;
 	}
 	
 	@SuppressWarnings("resource")
 	public boolean report_an_error(Integer error_id) {
 		if(error_id > error_summary.size())
 			return false;
+		if(error_id == last_error_id)
+			return true;
 		FileOutputStream fos = null;
 		try {
-			fos = new FileOutputStream(log_file_path, true);
+			fos = new FileOutputStream(log_file_path + log_file_name, true);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			System.out.println("can not open the log file");
 			e.printStackTrace();
 		}
@@ -77,16 +100,16 @@ public class ErrorUtil {
 			bw.write(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date())+" "+error_summary.get(error_id));
 			bw.newLine();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println("failed to write the log");
 			e.printStackTrace();
 		}
 		try {
 			bw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		last_error_id = error_id;
 		return true;
 	}
 }
