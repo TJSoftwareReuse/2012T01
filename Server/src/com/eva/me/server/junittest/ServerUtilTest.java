@@ -125,6 +125,7 @@ public class ServerUtilTest {
 		assertEquals("No in license", false, ServerUtil.doLiensePart());
 	}
 	
+	@Ignore
 	@Test
 	public void testFMModule() {
 		ServerUtil.doFMPart(1);
@@ -151,7 +152,7 @@ public class ServerUtilTest {
 		ServerUtil.doFMPart(2);
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test
 	public void testPMModule() {
 		ServerUtil.startPM();
@@ -161,10 +162,23 @@ public class ServerUtilTest {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		ServerUtil.doPMPart("hahahahah", 13);
+		ServerUtil.doPMPart("pm1", 13);
+		ServerUtil.doPMPart("pm2", 23);
+		ServerUtil.doPMPart("pm3", 1);
+		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		ServerUtil.doPMPart("pm4", 3);
+		ServerUtil.doPMPart("pm2", 0);
 		
 		ServerUtil.stopPM();
 		log("PM Stop.... at time: "+new Date());
+		
+		
 	}
 	
 	private void log(String str) {
