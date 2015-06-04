@@ -57,6 +57,10 @@ public class ServerUtil {
 		log("FM module finished!");
 	}
 	
+	public static void changePMDir(String pmFilePath) {
+		pm.setPath(pmFilePath);
+	}
+	
 	public static void startPM() {
 		pm.start();
 		pm.setPath(pmPath);
