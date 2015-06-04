@@ -88,6 +88,7 @@ public class ServerUtilTest {
 		
 	}
 	
+	@Ignore
 	@Test
 	public void testCMModuleForNewGroup() {
 //		ConfigUtil.getInstance().changeConfigFilePath("group_member.properties");
@@ -129,6 +130,21 @@ public class ServerUtilTest {
 		ServerUtil.doFMPart(1);
 		try {
 			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		ServerUtil.doFMPart(2);
+		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		ServerUtil.changeFMDir("junittest_error.log");
+		ServerUtil.doFMPart(1);
+		try {
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

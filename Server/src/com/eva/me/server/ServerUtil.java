@@ -13,7 +13,7 @@ import src.com.team8.License.License;
 public class ServerUtil {
 	private static final int LICENSE_MAX_SIZE = 10;
 	private static final License license = new License(LICENSE_MAX_SIZE);
-//	private static final PM pm = new PM();
+	private static final PM pm = new PM();
 	private static final String pmPath = "./PMLog/";
 	private static final ErrorUtil eu = new ErrorUtil();
 	
@@ -58,16 +58,20 @@ public class ServerUtil {
 	}
 	
 	public static void startPM() {
-//		PM.start();
-//		PM.setPath(pmPath);
+		pm.start();
+		pm.setPath(pmPath);
 	}
 	
 	public static void doPMPart(String key, int value) {
-//		PM.addItem(key, value);
+		pm.addItem(key, value);
 	}
 	
 	public static void stopPM() {
-//		PM.stop();
+		pm.stop();
+	}
+	
+	public static void changePMIntv(long interval) {
+		pm.resetInterval(interval);
 	}
 	
 	@Deprecated
