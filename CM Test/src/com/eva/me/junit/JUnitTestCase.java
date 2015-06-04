@@ -53,7 +53,7 @@ public class JUnitTestCase {
 	@Test
 	public void testSetProperty3() {
 		System.out.println("change property file ...change config files");
-		ConfigUtil.getInstance().changeConfigFilePath("config2.properties");//have another file but will not be able to open by the editor// can be open
+		ConfigUtil.changeConfigFilePath("config2.properties");//have another file but will not be able to open by the editor// can be open
 //		ConfigUtil.getInstance().loadConfigFile();
 		ConfigUtil.getInstance().setProperty("key0", "value00");
 		ConfigUtil.getInstance().setProperty("key1", "value11");
