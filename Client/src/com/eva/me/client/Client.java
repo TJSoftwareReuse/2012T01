@@ -29,13 +29,14 @@ public class Client {
 		while (true) {
 			try {
 				Socket clientSocket = new Socket(inetAddress, port);
-				clientSocket.setSoTimeout(10000);
+				clientSocket.setSoTimeout(1000);
 				
 				log("New Client Socket Instance init");
 				
 				OutputStream oStream = clientSocket.getOutputStream();
 				InputStream iStream = clientSocket.getInputStream();
-				String memName = new Scanner(System.in).nextLine();
+				Scanner scan = new Scanner(System.in);
+				String memName = scan.nextLine();
 				if (memName.equals("EXIT")) {
 					break;
 				}
@@ -44,6 +45,7 @@ public class Client {
 				String  result = transInputStreamToStr(iStream);
 				log("result: "+result);
 				
+				scan.close();
 				iStream.close();
 				clientSocket.close();
 			} catch (IOException e) {
@@ -69,6 +71,7 @@ public class Client {
 			e.printStackTrace();
 		}
 		byte[] dataAll = byteArrayOutputStream.toByteArray();
+		log("get byte array length: "+dataAll.length);
 		String result = "";
 		try {
 			result = new String(dataAll,0,dataAll.length,encoding);

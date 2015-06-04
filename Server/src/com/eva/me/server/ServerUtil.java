@@ -28,6 +28,10 @@ public class ServerUtil {
 		System.out.println(str);
 	}
 	
+	public static void changeCMDir(String cmFilePath) {
+		ConfigUtil.changeConfigFilePath(cmFilePath);
+	}
+	
 	public static String doCMPart(String key) {
 		String groupName = ConfigUtil.getInstance().getProperty(key);
 		if (groupName == null) {
