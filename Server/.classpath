@@ -3,9 +3,9 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="C:/Users/Zing/Documents/GitHub/DeliverComponents/License/T8/lastest_version/License.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Zing/Documents/GitHub/DeliverComponents/PM/T7/1.0/PM.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Zing/Documents/GitHub/DeliverComponents/CM/T1/latest version/PropertyUtil.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Zing/Documents/GitHub/DeliverComponents/FM/T1/2.0/T01_FM.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/Zing/Documents/GitHub/2012T01/lib/PM/PM.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

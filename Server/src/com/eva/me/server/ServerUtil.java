@@ -47,6 +47,10 @@ public class ServerUtil {
 		return license.inLicense();
 	}
 	
+	public static void changeFMDir(String fmFilePath) {
+		eu.set_error_path(fmFilePath);
+	}
+	
 	public static void doFMPart(int errCode) {
 		Integer error_id = new Integer(errCode);
 		eu.report_an_error(error_id);
