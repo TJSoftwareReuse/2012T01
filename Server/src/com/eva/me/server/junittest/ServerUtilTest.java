@@ -155,8 +155,8 @@ public class ServerUtilTest {
 //	@Ignore
 	@Test
 	public void testPMModule() {
-		ServerUtil.startPM();
 		ServerUtil.changePMIntv(1000);
+		ServerUtil.startPM();
 		log("PM Start.... at time: "+new Date());
 		try {
 			Thread.sleep(2000);

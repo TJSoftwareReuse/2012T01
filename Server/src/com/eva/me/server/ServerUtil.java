@@ -10,7 +10,7 @@ public class ServerUtil {
 	private static final int LICENSE_MAX_SIZE = 10;
 	private static final License license = new License(LICENSE_MAX_SIZE);
 	private static final PM pm = new PM();
-	private static final String pmPath = "PMLog";
+	private static final String pmPath = "z:/PMLog";
 	private static final ErrorUtil eu = new ErrorUtil();
 	
 	// SERVER STATUS
@@ -58,8 +58,8 @@ public class ServerUtil {
 	}
 	
 	public static void startPM() {
-		pm.start();
 		pm.setPath(pmPath);
+		pm.start();
 	}
 	
 	public static void doPMPart(String key, int value) {
