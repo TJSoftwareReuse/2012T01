@@ -1,20 +1,16 @@
 package com.eva.me.server;
 
-import org.omg.CORBA.PRIVATE_MEMBER;
+import pm.PM;
+import src.com.team8.License.License;
 
 import com.eva.me.cm.ConfigUtil;
 import com.team01.fm.ErrorUtil;
-import com.team01.fm.ErrorUtilTest;
-
-import pm.PM;
-
-import src.com.team8.License.License;
 
 public class ServerUtil {
 	private static final int LICENSE_MAX_SIZE = 10;
 	private static final License license = new License(LICENSE_MAX_SIZE);
 	private static final PM pm = new PM();
-	private static final String pmPath = "./PMLog/";
+	private static final String pmPath = "PMLog";
 	private static final ErrorUtil eu = new ErrorUtil();
 	
 	// SERVER STATUS

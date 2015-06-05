@@ -49,34 +49,36 @@ public class PM extends TimerTask {
 		setDeclaredField(TimerTask.class, this, "period", interval);
 	}
 
-		boolean setDeclaredField(Class<?> clazz, Object obj, String name,
-				Object value) {
-			try {
-				Field field = clazz.getDeclaredField(name);
-				field.setAccessible(true);
-				field.set(obj, value);
-				return true;
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				return false;
-			}
+	boolean setDeclaredField(Class<?> clazz, Object obj, String name,
+			Object value) {
+		try {
+			Field field = clazz.getDeclaredField(name);
+			field.setAccessible(true);
+			field.set(obj, value);
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
 		}
+	}
+
 	@Override
 	public void run() {
 		try {
 			Calendar cal = Calendar.getInstance();
-			//开始时间
+			// 开始时间
 			Date date = cal.getTime();
-			SimpleDateFormat sdFormat = new SimpleDateFormat(
-					"HH时-mm分-ss秒");
+			SimpleDateFormat sdFormat = new SimpleDateFormat("HH时-mm分-ss秒");
 			String myTime = sdFormat.format(date);
-			//结束时间
+			// 结束时间
 			long end = System.currentTimeMillis() + interval;
 			java.util.Date endDate = new Date(end);
 			String endTime = sdFormat.format(endDate);
-			
+
 			String fileName = path + "/pm" + myTime + "—" + endTime + ".txt";
 			File file = new File(fileName);
+			File dir = file.getParentFile();
+			dir.mkdirs();
 			file.createNewFile();
 
 			FileWriter fw = new FileWriter(file);
@@ -92,7 +94,6 @@ public class PM extends TimerTask {
 
 		}
 	}
-		
 
 
 }
