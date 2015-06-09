@@ -75,7 +75,7 @@ public class ClientProcessThread extends Thread{
 		String result = "";
 		try {
 			result = new String(dataAll,0,dataAll.length,encoding);
-			result = new String(dataAll,0,dataAll.length);
+//			result = new String(dataAll,0,dataAll.length);
 //		result = new String(dataAll);
 //		log("length = "+dataAll.length);
 			
