@@ -10,7 +10,7 @@ public class ServerUtil {
 	private static final int LICENSE_MAX_SIZE = 10;
 	private static final License license = new License(LICENSE_MAX_SIZE);
 	private static final PM pm = new PM();
-	private static final String pmPath = "PMLog";
+	private static String pmPath = "PMLog";
 	private static final ErrorUtil eu = new ErrorUtil();
 	
 	// SERVER STATUS
@@ -72,6 +72,43 @@ public class ServerUtil {
 	
 	public static void changePMIntv(long interval) {
 		pm.resetInterval(interval);
+	}
+	
+	public static void loadAllNeedInfomation() {
+		//Load FM Dir
+		String fmPath = ConfigUtil.getInstance().getProperty("FMPath");
+		if (fmPath == null) {
+			fmPath = "FMLog";//default value
+		}
+		ServerUtil.changeFMDir(fmPath);
+		
+		//Load PM Dir
+		pmPath = ConfigUtil.getInstance().getProperty("PMPath");
+		if (pmPath == null) {
+			pmPath = "PMLog";
+		}
+		ServerUtil.changePMDir(pmPath);
+		
+		//Load CM Dir
+		String cmPath = ConfigUtil.getInstance().getProperty("CMPath");
+		if (cmPath == null) {
+			cmPath = "config.properties";
+		}
+		ServerUtil.changeCMDir(cmPath);
+		
+		//Load PM Interval
+		long intv = 1000;//1s
+		String pmIntv = ConfigUtil.getInstance().getProperty("PMIntv");
+		if (pmIntv != null) {
+			try {
+				intv = Long.parseLong(pmIntv);
+			} catch (Exception e) {
+				e.printStackTrace();
+				intv=1000;
+			}
+		}
+		ServerUtil.changePMIntv(intv);
+		
 	}
 	
 	@Deprecated

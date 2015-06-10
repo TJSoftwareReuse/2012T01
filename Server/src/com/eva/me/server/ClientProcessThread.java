@@ -27,6 +27,8 @@ public class ClientProcessThread extends Thread{
 	}
 	
 	public ClientProcessThread(Socket cSocket) {
+		ServerUtil.loadAllNeedInfomation();//First load all you needed information such as file path...etc.
+		
 		this.clientSocket = cSocket;
 		try {
 			clientSocket.setSoTimeout(2000);
@@ -112,15 +114,19 @@ public class ClientProcessThread extends Thread{
 			log("\nNew Client Request Process Thread create.....\n\n");
 			processClientInfo();
 			log("\nNew Client Request Process Complete.....\n\n");
-			
-			try {
-				inputStream.close();
-				outputStream.close();
-				clientSocket.close();
-			} catch (IOException e) {
-				System.out.println("Stream.. close .. error...");
-				e.printStackTrace();
-			}
+		}
+
+		try {
+			Thread.sleep(3000);
+			inputStream.close();
+			outputStream.close();
+			clientSocket.close();
+		} catch (IOException e) {
+			System.out.println("Stream.. close .. error...");
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			log("Thread sleep error");
+			e.printStackTrace();
 		}
 		
 	}
