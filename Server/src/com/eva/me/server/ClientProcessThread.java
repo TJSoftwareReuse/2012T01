@@ -153,15 +153,44 @@ public class ClientProcessThread extends Thread{
 			log("processClientInfo : "+"support num ++");
 			ServerUtil.doPMPart("provide_service", ServerUtil.supportNum);
 			log("processClientInfo : "+"do PM part, provide_service update");
-			String groupName = ServerUtil.doCMPart(request);
-			log("processClientInfo : "+"do CM part, find group name... through ID: "+request);
-			if (groupName == null) {
-				log("processClientInfo : "+"do CM part, group name is null ... ID: "+request+" do not in any group");
-				response = "Group Name Do Not Exist!";
-			}else {
-				log("processClientInfo : "+"do CM part, group name is "+groupName+" ... ID: "+request);
-				response = groupName;
+			
+			//former inquire style
+//			String groupName = ServerUtil.doCMPart(request);
+//			log("processClientInfo : "+"do CM part, find group name... through ID: "+request);
+//			if (groupName == null) {
+//				log("processClientInfo : "+"do CM part, group name is null ... ID: "+request+" do not in any group");
+//				response = "Group Name Do Not Exist!";
+//			}else {
+//				log("processClientInfo : "+"do CM part, group name is "+groupName+" ... ID: "+request);
+//				response = groupName;
+//			}
+			
+			/**
+			 * request:  T:<Team Name>  or   M:<Mem Name>
+			 */
+			String[] contents =  request.split(":");
+			log("processClientInfo : "+"do CM part, request: "+request);
+			if (contents[0].equals("T")) {
+				String strMemList = ServerUtil.inquireGroupInfo(contents[1]);
+				if (strMemList == null) {
+					log("processClientInfo : "+"do CM part, member name list is null ... ID: "+request+" do not have a member");
+					response = "Not a vaild group name or group don't exist";
+				} else {
+					log("processClientInfo : "+"do CM part, members name is "+strMemList+" ... ID: "+request);
+					response = strMemList;
+				}
+			}else if (contents[0].equals("M")) {
+				String strGroupName = ServerUtil.inquireMemberName(contents[1]);
+				if (strGroupName == null) {
+					log("processClientInfo : "+"do CM part, group name is null ... ID: "+request+" do not in a group");
+					response = "Not a vaild member name or member don't exist in ant group";
+				} else {
+					log("processClientInfo : "+"do CM part, group name is "+strGroupName+" ... ID: "+request);
+					response = strGroupName;
+				}
 			}
+			
+			
 		} else {
 			//if false
 			//FM do not provide service
