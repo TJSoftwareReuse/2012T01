@@ -38,6 +38,26 @@ public class ServerUtil {
 		return groupName;
 	}
 	
+	/**
+	 * Input group name, get group member info
+	 * @param groupName
+	 * @return
+	 */
+	public static String inquireGroupInfo(String groupName) {
+		changeCMDir("group.properties");
+		return doCMPart(groupName);
+	}
+	
+	/**
+	 * Input member name, get member's group name
+	 * @param memName
+	 * @return
+	 */
+	public static String inquireMemberName(String memName) {
+		changeCMDir("member.properties");
+		return doCMPart(memName);
+	}
+	
 	public static boolean doLiensePart() {
 		log("License remain: "+license.getRemain()+" / "+license.getLicense());
 		return license.inLicense();
