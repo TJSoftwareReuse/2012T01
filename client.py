@@ -18,8 +18,8 @@ s = socket.socket()
 addr = (ip, int(port))
 
 s.connect(addr)
-# member ='许铭淏'
-member = '第一组'
+member ='M:许铭淏'
+# member = 'T:第一组'
 s.send(member)
 
 data = s.recv(1024)

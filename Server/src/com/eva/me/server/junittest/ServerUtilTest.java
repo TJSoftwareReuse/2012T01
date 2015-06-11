@@ -27,9 +27,10 @@ public class ServerUtilTest {
 	public void setUp() throws Exception {
 	}
 
-	@Ignore
+//	@Ignore
 	@Test
 	public void testCMModuleInit() {
+		ServerUtil.changeCMDir("member.properties");
 		ConfigUtil.getInstance().setProperty("吴逸菲", "第一组");
 		ConfigUtil.getInstance().setProperty("黄徐欢", "第一组");
 		ConfigUtil.getInstance().setProperty("李亚斯", "第一组");
@@ -88,10 +89,11 @@ public class ServerUtilTest {
 		
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test
 	public void testCMModuleForNewGroup() {
 //		ConfigUtil.getInstance().changeConfigFilePath("group_member.properties");
+		ServerUtil.changeCMDir("group.properties");
 		ConfigUtil.getInstance().setProperty("第一组","吴逸菲,黄徐欢,李亚斯,许铭淏");
 		ConfigUtil.getInstance().setProperty("第二组","王笑盈,孙琳,许舰,李伟,关晨");
 		ConfigUtil.getInstance().setProperty("第三组","胡圣托,邓冰茜,张奕格,郑勇俊,代蒙");

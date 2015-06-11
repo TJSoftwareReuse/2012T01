@@ -31,9 +31,9 @@ public class ServerUtil {
 	public static String doCMPart(String key) {
 		String groupName = ConfigUtil.getInstance().getProperty(key);
 		if (groupName == null) {
-			log("Member : "+key+" can not find a group name!");
+			log("Key : "+key+" can not find a value!");
 		} else {
-			log("Member : "+key+" is in group: "+groupName);
+			log("Key : "+key+" has value: "+groupName);
 		}
 		return groupName;
 	}

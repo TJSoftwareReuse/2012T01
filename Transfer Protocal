@@ -1,10 +1,9 @@
 Client Query Protocal:
   T:<Team Name>
-  N:<Mem Name>
+  M:<Mem Name>
 
 Server Change Settings Protocal:
   FM:<FM new file path>
   PMB:<Begin time>
   PME:<End time>
   CM:<CM new file path>
-  
